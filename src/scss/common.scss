@@ -1,0 +1,275 @@
+// Заголовки, общие БЄМ блоки и проче...
+
+[hidden] {
+  display: none !important;
+}
+
+._md1dn {
+  @media (max-width:$pc){
+    display: none !important;
+  }
+}
+
+._mmd1dn {
+  @media (min-width:$pc){
+    display: none !important;
+  }
+}
+
+._md2dn {
+  @media (max-width:$tablet){
+    display: none !important;
+  }
+}
+
+._mmd2dn {
+  @media (min-width:$tablet){
+    display: none !important;
+  }
+}
+
+._md3dn {
+  @media (max-width:$mobile){
+    display: none !important;
+  }
+}
+
+._mmd3dn {
+  @media (min-width:$mobile){
+    display: none !important;
+  }
+}
+
+._md4dn {
+  @media (max-width:$mobileSmall){
+    display: none !important;
+  }
+}
+
+._mmd4dn {
+  @media (min-width:$mobileSmall){
+    display: none !important;
+  }
+}
+
+
+.btn {
+  border-radius: rem(4);
+  color: var(--btnclr);
+  background-color: var(--btnbg);
+  border: rem(1) solid var(--btnbg);
+  transition: all 0.3s ease 0s;
+  font-weight: 600;
+  font-size: rem(13);
+  @media (any-hover: hover){
+    &:hover{
+      background-color: var(--btnclr);
+      color: var(--btnbg);
+    }
+  }
+  &-blue {
+    --btnbg: #417DB5;
+    --btnclr: #fff;
+  }
+  &-lightblue {
+    --btnbg: #2CA5F5;
+    --btnclr: #fff;
+  }
+  &-white {
+    --btnbg: #fff;
+    --btnclr: #2CA5F5;
+    font-weight: normal;
+    @media (any-hover: hover){
+      &:hover{
+        background-color: #fff;
+        color: #2CA5F5;
+        opacity: 0.8;
+      }
+    }
+  }
+}
+
+
+
+
+.authPopup {
+
+  &__wrapper {
+  }
+
+  &__content {
+    max-width: rem(368);
+    background-color: #fff;
+    border-radius: rem(8);
+    padding: rem(24);
+  }
+
+  &__top {
+    display: flex;
+    gap: rem(10);
+    justify-content: space-between;
+    &:not(:last-child) {margin-bottom: rem(8);}
+  }
+
+  &__back {
+    width: rem(32);
+    height: rem(32);
+    border-radius: 50%;
+    background-color: #F5F5F5;
+    opacity: 0.5;
+    transition: all 0.3s ease 0s;
+    transform: translateX(-50%);
+    @media (any-hover: hover){
+      &:hover{
+        opacity: 1;
+      }
+    }
+  }
+
+  &__close {
+    position: relative;
+    display: block;
+    margin-left: auto;
+    width: rem(32);
+    height: rem(32);
+    border-radius: 50%;
+    background-color: #F5F5F5;
+    transform: translateX(50%);
+    &::before,&::after{
+      content:'';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: rem(12);
+      height: rem(2);
+      background-color: #8E8E93;
+      transition: all 0.3s ease 0s;
+    }
+    &::before{
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+    &::after{
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+    @media (any-hover: hover){
+      &:hover{
+        &::before,&::after{
+          background-color: #000;
+        }
+      }
+    }
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__head {
+    display: flex;
+    flex-direction: column;
+    &:not(:last-child) {margin-bottom: rem(20);}
+  }
+
+  &__title {
+    color: #111;
+    font-weight: 600;
+    font-size: rem(20);
+    line-height: math.div(24 , 20);
+    &:not(:last-child) {margin-bottom: rem(4);}
+  }
+
+  &__subtitle {
+    color: #8E8E93;
+    font-size: rem(13);
+    line-height: math.div(18 , 13);
+  }
+
+  &__form {
+  }
+}
+.form-authPopup {
+  display: flex;
+  flex-direction: column;
+
+  &__item {
+    position: relative;
+    &_input {
+      &:not(:last-child) {margin-bottom: rem(18);}
+    }
+    &_timer {
+      font-size: rem(13);
+      color: #8E8E93;
+      padding: rem(15) 0;
+      line-height: math.div(24 , 13);
+    }
+    &:has(label) {
+      input {
+        padding: rem(19) rem(15) rem(5);
+      }
+    }
+    .form__error {
+      position: absolute;
+      bottom: calc(100% + rem(2));
+      left: 0;
+      font-size: rem(12);
+      color: red;
+    }
+  }
+
+  &__input {
+    width: 100%;
+    padding: rem(5) rem(15);
+    font-size: rem(15);
+    background-color: #f9f9f9;
+    border: 1px solid transparent;
+    min-height: rem(54);
+    border-radius: rem(4);
+    &:focus {
+      border-color: #2CA5F5;
+    }
+    &._form-error {
+      border-color: red;
+    }
+  }
+
+  &__label {
+    position: absolute;
+    font-size: rem(15);
+    line-height: math.div(20 , 15);
+    transition: all 0.3s ease 0s;
+    left: rem(16);
+    top: rem(16);
+    color: #8E8E93;
+    transform-origin: 0 100%;
+    pointer-events: none;
+    ._form-focus &,
+    ._form-input & {
+      transform: translateY(rem(-14)) scale(.8);
+    }
+    ._form-error & {
+      color: red;
+    }
+  }
+
+  &__button {
+    width: 100%;
+    font-size: rem(15);
+    line-height: math.div(24 , 15);
+    padding: rem(15) rem(24);
+    min-height: rem(54);
+    &.btn-white {
+      padding-bottom: 0;
+      min-height: 0;
+    }
+  }
+
+  &__pin {
+    text-align: center;
+    width: 100%;
+    font-size: rem(28);
+    line-height: math.div(32 , 28);
+    letter-spacing: rem(10);
+    height: rem(42);
+  }
+}

@@ -1,0 +1,139 @@
+<div id="authPopup" aria-hidden="true" class="popup authPopup">
+	<div class="popup__wrapper authPopup__wrapper">
+		<div class="popup__content authPopup__content">
+      <div class="authPopup__top">
+        <button data-close type="button" class="popup__close authPopup__close"></button>
+      </div>
+			<div class="popup__text authPopup__text">
+        <div class="authPopup__head">
+          <h2 class="authPopup__title">Введите номер телефона</h2>
+        </div>
+        <form action="#" data-dev method="post" class="authPopup__form form-authPopup">
+          <div class="form-authPopup__item form-authPopup__item_input">
+            <input type="text" data-phone data-inputmask="'mask':'+7 (999) 999-99-99'" data-inputmask-clearincomplete="true" class="form-authPopup__input" data-required data-error="Укажите номер телефона">
+            <label class="form-authPopup__label">Ваш телефон</label>
+          </div>
+          <div class="form-authPopup__item">
+            <button type="submit" class="form-authPopup__button btn btn-lightblue">Продолжить</button>
+          </div>
+          <div class="form-authPopup__item">
+            <button type="button" data-popup="#authEmailPopup" class="form-authPopup__button btn btn-white">Войти по почте</button>
+          </div>
+        </form>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<a href="javascript:void(0);" data-popup="#pinPopup"></a>
+<div id="pinPopup" aria-hidden="true" class="popup authPopup" data-nohash>
+	<div class="popup__wrapper authPopup__wrapper">
+		<div class="popup__content authPopup__content">
+      <div class="authPopup__top">
+        <button data-popup="#authPopup" class="authPopup__back">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M6.53125 12.625L0.90625 7L6.53125 1.375M1.6875 7L13.0937 7" stroke="#8E8E93" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button data-close type="button" class="popup__close authPopup__close"></button>
+      </div>
+			<div class="popup__text authPopup__text">
+        <div class="authPopup__head">
+          <h2 class="authPopup__title">Введите код из смс</h2>
+          <h2 class="authPopup__subtitle">Отправили на номер <span></span></h2>
+        </div>
+        <form action="#" data-dev method="post" class="authPopup__form form-authPopup">
+          <div class="form-authPopup__item form-authPopup__item_input">
+            <input type="text" data-pincode data-callback="myfn(this)" placeholder="____" class="form-authPopup__pin">
+            <!-- если накинуть инпуту атрибут "data-oncomplete-formsent" то при вводе четвёртого символа форма засабмитится, но аякс будет невозможен -->
+          </div>
+          <div class="form-authPopup__item form-authPopup__item_timer">
+            Получить новый код можно через 
+            <span data-timer="60">
+              <!-- время указываем в секундах -->
+            </span>
+          </div>
+          <div class="form-authPopup__item" hidden data-newcode>
+            <button type="button" class="form-authPopup__button btn btn-white">Получить новый код</button>
+          </div>
+        </form>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+  //каллбэк срабатывает как только введён последний символ. Можно эту функцию написать в любом месте, не только в инлайн скрипте
+  function myfn(input) {
+    console.log(input.value)
+  }
+</script>
+
+
+
+<div id="authEmailPopup" aria-hidden="true" class="popup authPopup">
+	<div class="popup__wrapper authPopup__wrapper">
+		<div class="popup__content authPopup__content">
+      <div class="authPopup__top">
+        <button data-close type="button" class="popup__close authPopup__close"></button>
+      </div>
+			<div class="popup__text authPopup__text">
+        <div class="authPopup__head">
+          <h2 class="authPopup__title">Введите e-mail и пароль</h2>
+          <span class="authPopup__subtitle">Только для зарегистрированных пользователей</span>
+        </div>
+        <form action="#" data-dev method="post" class="authPopup__form form-authPopup">
+          <div class="form-authPopup__item form-authPopup__item_input">
+            <input type="text" data-inputmask="'alias':'email'" data-inputmask-clearincomplete="true" class="form-authPopup__input" data-required data-error="Введите email">
+            <label class="form-authPopup__label">Электронная почта</label>
+          </div>
+          <div class="form-authPopup__item form-authPopup__item_input">
+            <input type="password" class="form-authPopup__input" data-required data-error="Введите пароль">
+            <label class="form-authPopup__label">Пароль</label>
+          </div>
+          <div class="form-authPopup__item">
+            <button type="submit" class="form-authPopup__button btn btn-lightblue">Войти</button>
+          </div>
+          <div class="form-authPopup__item">
+            <button type="button" data-popup="#recoveryPopup" class="form-authPopup__button btn btn-white">Забыли пароль?</button>
+          </div>
+          <div class="form-authPopup__item">
+            <button type="button" data-popup="#authPopup" class="form-authPopup__button btn btn-white">Войти по номеру телефона</button>
+          </div>
+        </form>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div id="recoveryPopup" aria-hidden="true" class="popup authPopup">
+	<div class="popup__wrapper authPopup__wrapper">
+		<div class="popup__content authPopup__content">
+      <div class="authPopup__top">
+        <button data-close type="button" class="popup__close authPopup__close"></button>
+      </div>
+			<div class="popup__text authPopup__text">
+        <div class="authPopup__head">
+          <h2 class="authPopup__title">Восстановление пароля</h2>
+        </div>
+        <form action="#" data-dev method="post" class="authPopup__form form-authPopup">
+          <div class="form-authPopup__item form-authPopup__item_input">
+            <input type="text" data-inputmask="'alias':'email'" data-inputmask-clearincomplete="true" class="form-authPopup__input" data-required data-error="Введите email">
+            <label class="form-authPopup__label">Электронная почта</label>
+          </div>
+          <div class="form-authPopup__item">
+            <button type="submit" class="form-authPopup__button btn btn-lightblue">Отправить письмо</button>
+          </div>
+          <div class="form-authPopup__item">
+            <button type="button" data-popup="#authPopup" class="form-authPopup__button btn btn-white">Войти по номеру телефона</button>
+          </div>
+          <div class="form-authPopup__item">
+            <button type="button" data-popup="#authEmailPopup" class="form-authPopup__button btn btn-white">Войти по почте</button>
+          </div>
+        </form>
+			</div>
+		</div>
+	</div>
+</div>
