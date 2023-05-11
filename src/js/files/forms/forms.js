@@ -23,8 +23,11 @@ export function formFieldsInit(options = { viewPass: false }) {
 		});
 	}
 	document.body.addEventListener("focusin", function (e) {
-		const targetElement = e.target;
-		if ((targetElement.tagName === 'INPUT' || targetElement.tagName === 'TEXTAREA')) {
+		let targetElement = e.target;
+		if ((targetElement.tagName === 'INPUT' || targetElement.tagName === 'TEXTAREA') || targetElement.closest('.select')) {
+      if (targetElement.closest('.select')) {
+        targetElement = targetElement.closest('.select').querySelector('select');
+      }
 			if (targetElement.dataset.placeholder) {
 				targetElement.placeholder = '';
 			}
@@ -32,7 +35,15 @@ export function formFieldsInit(options = { viewPass: false }) {
 				targetElement.classList.add('_form-focus');
 				targetElement.parentElement.classList.add('_form-focus');
 			}
-			formValidate.removeError(targetElement);
+      if (targetElement.type==='radio') {
+        const parent = targetElement.closest('[data-radio-parent]');
+        parent ? formValidate.removeError(parent) : null;
+        let name = targetElement.name;
+        document.querySelectorAll(`[name="${name}"]`).forEach(e=>{formValidate.removeError(e)});
+        formValidate.removeError(targetElement);
+      } else {
+        formValidate.removeError(targetElement);
+      }
 		}
 	});
 	document.body.addEventListener("input", function (e) {
@@ -79,34 +90,42 @@ export function formFieldsInit(options = { viewPass: false }) {
 }
 // Валидация форм
 export let formValidate = {
-	getErrors(form) {
+	getErrors(form, validate) {
 		let error = 0;
 		let formRequiredItems = form.querySelectorAll('*[data-required]');
 		if (formRequiredItems.length) {
 			formRequiredItems.forEach(formRequiredItem => {
 				if ((formRequiredItem.offsetParent !== null || formRequiredItem.tagName === "SELECT") && !formRequiredItem.disabled) {
-					error += this.validateInput(formRequiredItem);
+					error += this.validateInput(formRequiredItem, validate);
 				}
 			});
 		}
 		return error;
 	},
-	validateInput(formRequiredItem) {
+	validateInput(formRequiredItem, validate = true) {
 		let error = 0;
 		if (formRequiredItem.dataset.required === "email") {
 			formRequiredItem.value = formRequiredItem.value.replace(" ", "");
 			if (this.emailTest(formRequiredItem)) {
-				this.addError(formRequiredItem);
+				validate ? this.addError(formRequiredItem) : null;
 				error++;
 			} else {
 				this.removeError(formRequiredItem);
 			}
 		} else if (formRequiredItem.type === "checkbox" && !formRequiredItem.checked) {
-			this.addError(formRequiredItem);
+			validate ? this.addError(formRequiredItem) : null;
 			error++;
-		} else {
+		} else if (formRequiredItem.type === "radio") {
+      let name = formRequiredItem.name;
+      if (!document.querySelector(`input[name="${name}"]:checked`)) {
+				validate ? this.addError(formRequiredItem) : null;
+				error++;
+      } else {
+				this.removeError(formRequiredItem);
+			}
+    } else {
 			if (!formRequiredItem.value.trim()) {
-				this.addError(formRequiredItem);
+				validate ? this.addError(formRequiredItem) : null;
 				error++;
 			} else {
 				this.removeError(formRequiredItem);
@@ -117,17 +136,20 @@ export let formValidate = {
 	addError(formRequiredItem) {
 		formRequiredItem.classList.add('_form-error');
 		formRequiredItem.parentElement.classList.add('_form-error');
-		let inputError = formRequiredItem.parentElement.querySelector('.form__error');
-		if (inputError) formRequiredItem.parentElement.removeChild(inputError);
+    const parent = formRequiredItem.closest('[data-radio-parent]') ? formRequiredItem.closest('[data-radio-parent]') : formRequiredItem.parentElement;
+		let inputError = parent.querySelector('.form__error');
+		if (inputError) parent.removeChild(inputError);
 		if (formRequiredItem.dataset.error) {
-			formRequiredItem.parentElement.insertAdjacentHTML('beforeend', `<div class="form__error">${formRequiredItem.dataset.error}</div>`);
+			parent.insertAdjacentHTML('beforeend', `<div class="form__error">${formRequiredItem.dataset.error}</div>`);
 		}
 	},
 	removeError(formRequiredItem) {
 		formRequiredItem.classList.remove('_form-error');
+    const parent = formRequiredItem.closest('[data-radio-parent]') ? formRequiredItem.closest('[data-radio-parent]') : formRequiredItem.parentElement;
 		formRequiredItem.parentElement.classList.remove('_form-error');
-		if (formRequiredItem.parentElement.querySelector('.form__error')) {
-			formRequiredItem.parentElement.removeChild(formRequiredItem.parentElement.querySelector('.form__error'));
+		parent.classList.remove('_form-error');
+		if (parent.querySelector('.form__error')) {
+			parent.removeChild(parent.querySelector('.form__error'));
 		}
 	},
 	formClean(form) {
@@ -215,7 +237,9 @@ export function formSubmit(options = { validate: true }) {
 				}
 			} else if (form.hasAttribute('data-dev')) {	// Если режим разработки
 				e.preventDefault();
-				formSent(form, {success: true});
+				formSent(form, {success: true, findemail: false, message: `
+        <p><strong>Мы отправили ссылку для активации учетной записи.</strong></p>
+        <p>Если письма нет во Входящих и в папке Спам, напишите нам через форму обратной связи с сайта</p>`});
 			}
 		} else {
 			e.preventDefault();

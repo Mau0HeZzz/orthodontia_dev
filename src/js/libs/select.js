@@ -83,7 +83,7 @@ export class SelectConstructor {
     // Запуск инициализации
     if (this.config.init) {
       // Получение всех select на странице
-      const selectItems = data ? document.querySelectorAll(data) : document.querySelectorAll('select');
+      const selectItems = data ? document.querySelectorAll(data) : document.querySelectorAll('[data-custom-select]');
       if (selectItems.length) {
         this.selectsInit(selectItems);
         this.setLogging(`Проснулся, построил селектов: (${selectItems.length})`);
@@ -239,6 +239,7 @@ export class SelectConstructor {
     const originalSelect = this.getSelectElement(selectItem).originalSelect;
     const selectOptions = this.getSelectElement(selectItem, this.selectClasses.classSelectOptions).selectElement;
     if (!selectOptions.classList.contains('_slide')) {
+      selectItem.parentElement.classList.remove(this.selectClasses.classSelectOpen);
       selectItem.classList.remove(this.selectClasses.classSelectOpen);
       _slideUp(selectOptions, originalSelect.dataset.speed);
     }
@@ -257,6 +258,7 @@ export class SelectConstructor {
 
     if (!selectOptions.classList.contains('_slide')) {
       selectItem.classList.toggle(this.selectClasses.classSelectOpen);
+      selectItem.parentElement.classList.toggle(this.selectClasses.classSelectOpen);
       _slideToggle(selectOptions, originalSelect.dataset.speed);
     }
   }
@@ -292,6 +294,7 @@ export class SelectConstructor {
     }
     // Если есть значение, добавляем класс
     this.getSelectedOptionsData(originalSelect).values.length ? selectItem.classList.add(this.selectClasses.classSelectActive) : selectItem.classList.remove(this.selectClasses.classSelectActive);
+    this.getSelectedOptionsData(originalSelect).values.length ? selectItem.parentElement.classList.add(this.selectClasses.classSelectActive) : selectItem.parentElement.classList.remove(this.selectClasses.classSelectActive);
     // Возвращаем поле ввода для поиска или текст
     if (originalSelect.hasAttribute('data-search')) {
       // Выводим поле ввода для поиска

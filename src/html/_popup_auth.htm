@@ -85,7 +85,7 @@
         </div>
         <form action="#" data-dev method="post" class="authPopup__form form-authPopup">
           <div class="form-authPopup__item form-authPopup__item_input">
-            <input type="text" data-inputmask="'alias':'email'" data-inputmask-clearincomplete="true" class="form-authPopup__input" data-required data-error="Введите email">
+            <input type="text" data-inputmask="'alias':'email'" class="form-authPopup__input" data-email-input data-required="emal" data-error="Введите email">
             <label class="form-authPopup__label">Электронная почта</label>
           </div>
           <div class="form-authPopup__item form-authPopup__item_input">
@@ -133,6 +133,172 @@
             <button type="button" data-popup="#authEmailPopup" class="form-authPopup__button btn btn-white">Войти по почте</button>
           </div>
         </form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<a href="javascript:void(0);" data-popup="#registerStepOne"></a>
+<div id="registerStepOne" aria-hidden="true" class="popup authPopup">
+	<div class="popup__wrapper authPopup__wrapper">
+		<div class="popup__content authPopup__content">
+      <div class="authPopup__top">
+        <button data-close type="button" class="popup__close authPopup__close"></button>
+      </div>
+			<div class="popup__text authPopup__text">
+        <div class="authPopup__head">
+          <h2 class="authPopup__title">Регистрация</h2>
+          <span class="authPopup__subtitle">Мы не нашли ваш email. Хотите <br> зарегистрироваться?</span>
+        </div>
+        <form action="#" data-dev method="post" class="authPopup__form form-authPopup">
+          <div class="form-authPopup__item form-authPopup__item_input">
+            <input type="text" data-inputmask="'alias':'email'" data-email-input class="form-authPopup__input" data-required="email" data-error="Укажите email">
+            <label class="form-authPopup__label">Электронная почта</label>
+          </div>
+          <div class="form-authPopup__item">
+            <button type="submit" class="form-authPopup__button btn btn-lightblue">Зарегистрироваться</button>
+          </div>
+          <div class="form-authPopup__item">
+            <button type="button" data-popup="#authPopup" class="form-authPopup__button btn btn-white">Войти по номеру телефона</button>
+          </div>
+          <div class="form-authPopup__item">
+            <button type="button" data-popup="#authEmailPopup" class="form-authPopup__button btn btn-white">Войти по почте</button>
+          </div>
+        </form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<a href="javascript:void(0);" data-popup="#registerStepTwo"></a>
+<div id="registerStepTwo" aria-hidden="true" class="popup authPopup">
+	<div class="popup__wrapper authPopup__wrapper">
+		<div class="popup__content authPopup__content">
+      <div class="authPopup__top">
+        <button data-popup="#authEmailPopup" class="authPopup__back">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M6.53125 12.625L0.90625 7L6.53125 1.375M1.6875 7L13.0937 7" stroke="#8E8E93" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button data-close type="button" class="popup__close authPopup__close"></button>
+      </div>
+			<div class="popup__text authPopup__text">
+        <div class="authPopup__head">
+          <h2 class="authPopup__title">Вы врач?</h2>
+          <span class="authPopup__subtitle">Пожалуйста, ответьте на вопрос, для <br> персональных рекомендаций</span>
+        </div>
+        <form action="#" data-dev method="post" class="authPopup__form form-authPopup" data-radio-spollers data-radio-parent>
+          <div class="form-authPopup__item form-authPopup__item_radio">
+            <input type="radio" data-required data-error="Необходимо отметить хотя бы один вариант" name="specialization" id="form-authPopup__radio_1" class="form-authPopup__radio">
+            <label for="form-authPopup__radio_1" class="form-authPopup__label"><span></span>Ортодонт</label>
+          </div>
+          <div class="form-authPopup__item form-authPopup__item_radio">
+            <input type="radio" data-required data-error="Необходимо отметить хотя бы один вариант" name="specialization" id="form-authPopup__radio_2" class="form-authPopup__radio">
+            <label for="form-authPopup__radio_2" class="form-authPopup__label"><span></span>Хирург</label>
+          </div>
+          <div class="form-authPopup__item form-authPopup__item_radio" data-radio-spoller>
+            <input type="radio" data-required data-error="Необходимо отметить хотя бы один вариант" name="specialization" id="form-authPopup__radio_3" class="form-authPopup__radio">
+            <label for="form-authPopup__radio_3" class="form-authPopup__label"><span></span>Другая специализация</label>
+            <div class="form-authPopup__subitem" hidden data-radio-spoller-drop>
+              <input type="text" class="form-authPopup__subinput" placeholder="Ваша специализация" data-need-required>
+            </div>
+          </div>
+          <div class="form-authPopup__item form-authPopup__item_radio" data-radio-spoller>
+            <input type="radio" data-required data-error="Необходимо отметить хотя бы один вариант" name="specialization" id="form-authPopup__radio_4" class="form-authPopup__radio">
+            <label for="form-authPopup__radio_4" class="form-authPopup__label"><span></span>Студент</label>
+            <div class="form-authPopup__subitem" hidden data-radio-spoller-drop>
+              <select data-custom-select data-scroll data-search data-need-required>
+                <option value="">ВУЗ</option>
+                <option value="VUZ_1">ВУЗ_1</option>
+                <option value="VUZ_2">ВУЗ_2</option>
+                <option value="VUZ_3">ВУЗ_3</option>
+                <option value="VUZ_4">ВУЗ_4</option>
+                <option value="VUZ_5">ВУЗ_5</option>
+                <option value="VUZ_6">ВУЗ_6</option>
+                <option value="VUZ_7">ВУЗ_7</option>
+                <option value="VUZ_8">ВУЗ_8</option>
+                <option value="VUZ_9">ВУЗ_9</option>
+                <option value="VUZ_10">ВУЗ_10</option>
+                <option value="VUZ_11">ВУЗ_11</option>
+                <option value="VUZ_12">ВУЗ_12</option>
+                <option value="VUZ_13">ВУЗ_13</option>
+                <option value="VUZ_14">ВУЗ_14</option>
+                <option value="VUZ_15">ВУЗ_15</option>
+                <option value="VUZ_16">ВУЗ_16</option>
+                <option value="VUZ_17">ВУЗ_17</option>
+                <option value="VUZ_18">ВУЗ_18</option>
+                <option value="VUZ_19">ВУЗ_19</option>
+                <option value="VUZ_20">ВУЗ_20</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-authPopup__item form-authPopup__item_radio">
+            <input type="radio" data-required data-error="Необходимо отметить хотя бы один вариант" name="specialization" id="form-authPopup__radio_5" class="form-authPopup__radio">
+            <label for="form-authPopup__radio_5" class="form-authPopup__label"><span></span>Не врач</label>
+          </div>
+          <div class="form-authPopup__item">
+            <button type="submit" class="form-authPopup__button btn btn-lightblue">Продолжить</button>
+          </div>
+        </form>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<a href="javascript:void(0);" data-popup="#registerStepThree"></a>
+<div id="registerStepThree" aria-hidden="true" class="popup authPopup">
+	<div class="popup__wrapper authPopup__wrapper">
+		<div class="popup__content authPopup__content">
+      <div class="authPopup__top">
+        <button data-close type="button" class="popup__close authPopup__close"></button>
+      </div>
+			<div class="popup__text authPopup__text">
+        <div class="authPopup__head">
+          <h2 class="authPopup__title">Расскажите о себе</h2>
+          <span class="authPopup__subtitle">Заполните поля для завершения регистрации</span>
+        </div>
+        <form action="#" data-dev method="post" class="authPopup__form form-authPopup">
+          <div class="form-authPopup__item form-authPopup__item_input">
+            <input type="text" class="form-authPopup__input" data-required>
+            <label class="form-authPopup__label">Имя</label>
+          </div>
+          <div class="form-authPopup__item form-authPopup__item_input">
+            <input type="text" class="form-authPopup__input">
+            <label class="form-authPopup__label">Фамилия</label>
+          </div>
+          <div class="form-authPopup__item form-authPopup__item_input">
+            <input type="text" class="form-authPopup__input">
+            <label class="form-authPopup__label">Адрес</label>
+          </div>
+          <div class="form-authPopup__item form-authPopup__item_checkbox">
+            <input type="checkbox" class="form-authPopup__checkbox" id="form-authPopup__checkbox" data-required>
+            <label class="form-authPopup__label" for="form-authPopup__checkbox"><span>Согласие на обработку данных и с  <br> <a href="#">политикой конфиденциальности</a></span></label>
+          </div>
+          <div class="form-authPopup__item">
+            <button type="submit" class="form-authPopup__button btn btn-lightblue">Зарегистрироваться</button>
+          </div>
+        </form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<a href="javascript:void(0);" data-popup="#registerStepLast"></a>
+<div id="registerStepLast" aria-hidden="true" class="popup authPopup">
+	<div class="popup__wrapper authPopup__wrapper">
+		<div class="popup__content authPopup__content">
+      <div class="authPopup__top">
+        <button data-close type="button" class="popup__close authPopup__close"></button>
+      </div>
+			<div class="popup__text authPopup__text">
+        <div class="authPopup__head">
+          <h2 class="authPopup__title">Проверьте почту!</h2>
+        </div>
+        <div class="authPopup__finaltext">
+          <p><strong>Мы отправили ссылку для активации учетной записи.</strong></p>
+          <p>Если письма нет во Входящих и в папке Спам, напишите нам через форму обратной связи с сайта</p>
+        </div>
 			</div>
 		</div>
 	</div>

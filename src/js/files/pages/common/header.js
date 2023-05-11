@@ -1,5 +1,6 @@
 import { mhzModules } from "../../modules.js";
 import { formValidate } from "../../forms/forms.js";
+import { isMobile, _slideDown, _slideUp } from "../../functions.js";
 // Подключение плагина из node_modules
 import SimpleBar from 'simplebar';
 // Подключение стилей из node_modules
@@ -14,11 +15,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const sideMenu = document.querySelector('.sidemenu');
   sideMenu ? sideMenuActions(sideMenu) : null;
+
+  const middleSubMenuParents =document.querySelectorAll('[data-middlesubmenu-parent]');
+  const middleSubMenuChildrens =document.querySelectorAll('[data-middlesubmenu-children]');
+  if (middleSubMenuParents.length&&middleSubMenuChildrens.length) {
+    subMenuActions(middleSubMenuParents, middleSubMenuChildrens);
+  }
 })
 
 document.addEventListener('formSent', (e)=>{
   const form = e.detail.form;
-  const {success} = e.detail.responseResult;
+  const {success, findemail, message} = e.detail.responseResult;
   if (form.closest('#authPopup')&&success) {
     const phoneInput = form.querySelector('[data-phone]');
     const phoneOutput = document.querySelector('#pinPopup .authPopup__subtitle span');
@@ -45,6 +52,34 @@ document.addEventListener('formSent', (e)=>{
     })
     : null;
   }
+
+  if (form.closest('#authEmailPopup')&&!findemail) {
+    const emailInput = form.querySelector('[data-email-input]');
+    if (emailInput.value !== '') {
+      let email = emailInput.value;
+      const emailRegisterInput = document.querySelector('#registerStepOne [data-email-input]');
+      if (emailRegisterInput) {
+        emailRegisterInput.value = email;
+        emailRegisterInput.classList.add('_form-input');
+        emailRegisterInput.parentElement.classList.add('_form-input');
+      }
+    }
+    mhzModules.popup.open('#registerStepOne');
+  }
+
+  if (form.closest('#registerStepOne')&&success) {
+    mhzModules.popup.open('#registerStepTwo');
+  }
+  if (form.closest('#registerStepTwo')&&success) {
+    mhzModules.popup.open('#registerStepThree');
+  }
+  if (form.closest('#registerStepThree')&&success) {
+    const finalTextEl = document.querySelector('#registerStepLast .authPopup__finaltext');
+    if (message&&typeof message === 'string'&&message.trim()!==''&&finalTextEl) {
+      finalTextEl.innerHTML = message;
+    }
+    mhzModules.popup.open('#registerStepLast');
+  }
 })
 
 document.addEventListener('beforePopupClose', (e)=>{
@@ -54,10 +89,42 @@ document.addEventListener('beforePopupClose', (e)=>{
   }
 })
 
-const middleSubMenuParents =document.querySelectorAll('[data-middlesubmenu-parent]');
-const middleSubMenuChildrens =document.querySelectorAll('[data-middlesubmenu-children]');
-if (middleSubMenuParents.length&&middleSubMenuChildrens.length) {
-  subMenuActions(middleSubMenuParents, middleSubMenuChildrens);
+document.addEventListener('change', (e)=>{
+  const target = e.target;
+  const mainParent = target.closest('[data-radio-spollers]');
+  if (mainParent) {
+    const parent = target.closest('[data-radio-spoller]');
+    const drops = mainParent.querySelectorAll('[data-radio-spoller-drop]')
+    drops.forEach(drop=>{
+      if (!parent||!parent.contains(drop)) {
+        if (drop.querySelectorAll('[data-need-required]').length) {
+          drop.querySelectorAll('[data-need-required]').forEach(e=>{
+            e.removeAttribute('data-required');
+          })
+        }
+        _slideUp(drop);
+      } else {
+        if (drop.querySelectorAll('[data-need-required]').length) {
+          drop.querySelectorAll('[data-need-required]').forEach(e=>{
+            e.setAttribute('data-required', '');
+          })
+        }
+        _slideDown(drop);
+      }
+    })
+  }
+})
+
+document.addEventListener('input', formMomoentValidate);
+document.addEventListener('focusout', formMomoentValidate);
+
+function formMomoentValidate(e) {
+  const target = e.target;
+  const form = target.closest('form');
+  if (form) {
+    const button = form.querySelector('[type="submit"]');
+    button.disabled = formValidate.getErrors(form, false)>0 ? true : false;
+  }
 }
 
 function cityChangeActions(citychange) {
