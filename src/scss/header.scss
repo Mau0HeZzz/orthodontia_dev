@@ -58,6 +58,8 @@
   top: 0;
   left: 0;
   width: 100%;
+  z-index: 145;
+  background-color: #fff;
   &._header-scroll {
     position: fixed;
     box-shadow: 0 1px 4px rgba(26,26,26,.08);
@@ -389,7 +391,7 @@
 
   &__container {
     display: flex;
-    padding-bottom: rem(16);
+    padding-bottom: rem(10);
     justify-content: space-between;
     @include adaptiveValue("gap", 23, 17, 1920, 1200, 1);
   }
@@ -799,8 +801,8 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
   z-index: 140;
+  background-color: #fff;
   .lock & {
     z-index: -1;
   }

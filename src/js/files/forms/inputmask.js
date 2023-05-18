@@ -19,7 +19,7 @@ export function inputmaslFirstInit() {
   pincodeInputs.length ? pincodeInputs.forEach(pincodeInput=>{
     let callback = pincodeInput.getAttribute('data-callback');
     new Inputmask({
-      mask: '9999',
+      mask: '999999',
       inputmode: 'numeric',
       oncomplete: function() {
         const form = this.closest('form');

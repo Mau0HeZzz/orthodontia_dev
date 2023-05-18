@@ -86,6 +86,10 @@ document.addEventListener('beforePopupClose', (e)=>{
   const form = e.detail.popup.targetOpen.element.querySelector('form');
   if (form) {
     formValidate.formClean(form);
+    const drops = form.querySelectorAll('[data-radio-spoller-drop]');
+    drops.length ? drops.forEach(drop=>{
+      _slideUp(drop);
+    }) : null;
   }
 })
 
@@ -120,7 +124,7 @@ document.addEventListener('focusout', formMomoentValidate);
 
 function formMomoentValidate(e) {
   const target = e.target;
-  const form = target.closest('form');
+  const form = target.closest('form[data-validate]');
   if (form) {
     const button = form.querySelector('[type="submit"]');
     button.disabled = formValidate.getErrors(form, false)>0 ? true : false;

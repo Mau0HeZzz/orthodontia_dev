@@ -1,110 +1,121 @@
-/*
-Документация по работе в шаблоне: 
-Документация слайдера: https://swiperjs.com/
-Сниппет(HTML): swiper
-*/
-
-// Подключаем слайдер Swiper из node_modules
-// При необходимости подключаем дополнительные модули слайдера, указывая их в {} через запятую
-// Пример: { Navigation, Autoplay }
-import Swiper, { Navigation } from 'swiper';
-/*
-Основниые модули слайдера:
-Navigation, Pagination, Autoplay, 
-EffectFade, Lazy, Manipulation
-Подробнее смотри https://swiperjs.com/
-*/
-
-// Стили Swiper
-// Базовые стили
-import "../../scss/base/swiper.scss";
-// Полный набор стилей из scss/libs/swiper.scss
-// import "../../scss/libs/swiper.scss";
-// Полный набор стилей из node_modules
-// import 'swiper/css';
+import Splide from '@splidejs/splide';
+import '@splidejs/splide/css/core';
 
 // Инициализация слайдеров
 function initSliders() {
-	// Перечень слайдеров
-	// Проверяем, есть ли слайдер на стронице
-	if (document.querySelector('.swiper')) { // Указываем скласс нужного слайдера
-		// Создаем слайдер
-		new Swiper('.swiper', { // Указываем скласс нужного слайдера
-			// Подключаем модули слайдера
-			// для конкретного случая
-			modules: [Navigation],
-			observer: true,
-			observeParents: true,
-			slidesPerView: 1,
-			spaceBetween: 0,
-			autoHeight: true,
-			speed: 800,
-
-			//touchRatio: 0,
-			//simulateTouch: false,
-			//loop: true,
-			//preloadImages: false,
-			//lazy: true,
-
-			/*
-			// Эффекты
-			effect: 'fade',
-			autoplay: {
-				delay: 3000,
-				disableOnInteraction: false,
-			},
-			*/
-
-			// Пагинация
-			/*
-			pagination: {
-				el: '.swiper-pagination',
-				clickable: true,
-			},
-			*/
-
-			// Скроллбар
-			/*
-			scrollbar: {
-				el: '.swiper-scrollbar',
-				draggable: true,
-			},
-			*/
-
-			// Кнопки "влево/вправо"
-			navigation: {
-				prevEl: '.swiper-button-prev',
-				nextEl: '.swiper-button-next',
-			},
-
-			// Брейкпоинты
-			/*
-			breakpoints: {
-				320: {
-					slidesPerView: 1,
-					spaceBetween: 0,
-					autoHeight: true,
-				},
-				768: {
-					slidesPerView: 2,
-					spaceBetween: 20,
-				},
-				992: {
-					slidesPerView: 3,
-					spaceBetween: 20,
-				},
-				1268: {
-					slidesPerView: 4,
-					spaceBetween: 30,
-				},
-			},
-			*/
-			// События
-			on: {
-
-			}
-		});
-	}
+  if (document.querySelector('.hero__slider')) {
+    let splide = new Splide('.hero__slider', {
+      type: 'loop',
+      perPage: 1,
+      pagination: true,
+      autoplay: true,
+      breakpoints: {
+        1200: {
+          gap: 10,
+        }
+      }
+    }).mount();
+  }
+  if (document.querySelector('.events__slider')) {
+    let splide = new Splide('.events__slider', {
+      type: 'slide',
+      perPage: 3,
+      perMove: 1,
+      pagination: false,
+      autoplay: false,
+      arrows: false,
+      gap: 16,
+      mediaQuery: 'min',
+      breakpoints: {
+        1200: {
+          destroy: true,
+          gap: 16,
+        },
+        767: {
+          perPage: 3,
+        },
+        480: {
+          perPage: 2,
+        },
+        100: {
+          perPage: 1,
+          gap: 17,
+        }
+      }
+    }).mount();
+  }
+  if (document.querySelector('.records__slider')) {
+    let splide = new Splide('.records__slider', {
+      type: 'loop',
+      perPage: 4,
+      perMove: 1,
+      pagination: false,
+      autoplay: true,
+      mediaQuery: 'min',
+      breakpoints: {
+        1200: {
+          perPage: 4,
+          gap: 20,
+        },
+        767: {
+          perPage: 3,
+        },
+        480: {
+          perPage: 2,
+        },
+        100: {
+          perPage: 1,
+          gap: 16,
+        }
+      }
+    }).mount();
+  }
+  if (document.querySelector('.news__slider')) {
+    let splide = new Splide('.news__slider', {
+      type: 'loop',
+      perPage: 3,
+      perMove: 1,
+      pagination: false,
+      autoplay: true,
+      mediaQuery: 'min',
+      breakpoints: {
+        992: {
+          perPage: 3,
+          gap: 21,
+        },
+        480: {
+          perPage: 2,
+        },
+        100: {
+          perPage: 1,
+          gap: 16,
+        }
+      }
+    }).mount();
+  }
+  if (document.querySelector('.reviews__slider')) {
+    let splide = new Splide('.reviews__slider', {
+      type: 'slide',
+      perPage: 3,
+      perMove: 1,
+      pagination: false,
+      autoplay: true,
+      mediaQuery: 'min',
+      breakpoints: {
+        992: {
+          perPage: 3,
+          gap: 20,
+        },
+        480: {
+          perPage: 2,
+        },
+        100: {
+          perPage: 1,
+          gap: 16,
+        }
+      }
+    }).mount();
+  }
 }
 // Скролл на базе слайдера (по классу swiper_scroll для оболочки слайдера)
 function initSlidersScroll() {
@@ -141,3 +152,5 @@ window.addEventListener("load", function (e) {
 	// Запуск инициализации скролла на базе слайдера (по классу swiper_scroll)
 	//initSlidersScroll();
 });
+
+

@@ -2,19 +2,20 @@
 	<div class="popup__wrapper authPopup__wrapper">
 		<div class="popup__content authPopup__content">
       <div class="authPopup__top">
-        <button data-close type="button" class="popup__close authPopup__close"></button>
+        <button data-close type="button" class="popup__close authPopup__close _md3dn"></button>
+        <button data-drag-close type="button" class="popup__close popupEventRegFull__close _mmd3dn"></button>
       </div>
 			<div class="popup__text authPopup__text">
         <div class="authPopup__head">
           <h2 class="authPopup__title">Введите номер телефона</h2>
         </div>
-        <form action="#" data-dev method="post" class="authPopup__form form-authPopup">
+        <form action="#" data-dev method="post" class="authPopup__form form-authPopup" data-validate>
           <div class="form-authPopup__item form-authPopup__item_input">
             <input type="text" data-phone data-inputmask="'mask':'+7 (999) 999-99-99'" data-inputmask-clearincomplete="true" class="form-authPopup__input" data-required data-error="Укажите номер телефона">
             <label class="form-authPopup__label">Ваш телефон</label>
           </div>
-          <div class="form-authPopup__item">
-            <button type="submit" class="form-authPopup__button btn btn-lightblue">Продолжить</button>
+          <div class="form-authPopup__item form-authPopup__item_btn">
+            <button type="submit" class="form-authPopup__button btn btn-lightblue" disabled>Продолжить</button>
           </div>
           <div class="form-authPopup__item">
             <button type="button" data-popup="#authEmailPopup" class="form-authPopup__button btn btn-white">Войти по почте</button>
@@ -32,10 +33,17 @@
 	<div class="popup__wrapper authPopup__wrapper">
 		<div class="popup__content authPopup__content">
       <div class="authPopup__top">
-        <button data-popup="#authPopup" class="authPopup__back">
+        <button data-drag-close type="button" class="popup__close popupEventRegFull__close _mmd3dn"></button>
+        <button data-popup="#authPopup" class="authPopup__back _md3dn">
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
             <path d="M6.53125 12.625L0.90625 7L6.53125 1.375M1.6875 7L13.0937 7" stroke="#8E8E93" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
+        </button>
+        <button data-popup="#authPopup" class="authPopup__back _mmd3dn">
+          <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 1L1 7L7 13" stroke="#8A8A8A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Назад</span>
         </button>
         <button data-close type="button" class="popup__close authPopup__close"></button>
       </div>
@@ -46,7 +54,7 @@
         </div>
         <form action="#" data-dev method="post" class="authPopup__form form-authPopup">
           <div class="form-authPopup__item form-authPopup__item_input">
-            <input type="text" data-pincode data-callback="myfn(this)" placeholder="____" class="form-authPopup__pin">
+            <input type="text" data-pincode data-callback="myfn(this)" placeholder="______" class="form-authPopup__pin">
             <!-- если накинуть инпуту атрибут "data-oncomplete-formsent" то при вводе четвёртого символа форма засабмитится, но аякс будет невозможен -->
           </div>
           <div class="form-authPopup__item form-authPopup__item_timer">
@@ -76,24 +84,25 @@
 	<div class="popup__wrapper authPopup__wrapper">
 		<div class="popup__content authPopup__content">
       <div class="authPopup__top">
-        <button data-close type="button" class="popup__close authPopup__close"></button>
+        <button data-drag-close type="button" class="popup__close popupEventRegFull__close _mmd3dn"></button>
+        <button data-close type="button" class="popup__close authPopup__close _md3dn"></button>
       </div>
 			<div class="popup__text authPopup__text">
         <div class="authPopup__head">
           <h2 class="authPopup__title">Введите e-mail и пароль</h2>
           <span class="authPopup__subtitle">Только для зарегистрированных пользователей</span>
         </div>
-        <form action="#" data-dev method="post" class="authPopup__form form-authPopup">
+        <form action="#" data-dev method="post" class="authPopup__form form-authPopup" data-validate>
           <div class="form-authPopup__item form-authPopup__item_input">
-            <input type="text" data-inputmask="'alias':'email'" class="form-authPopup__input" data-email-input data-required="emal" data-error="Введите email">
+            <input type="text" class="form-authPopup__input" data-inputmask="'alias':'email'" data-email-input data-required="email" data-error="Введите email">
             <label class="form-authPopup__label">Электронная почта</label>
           </div>
           <div class="form-authPopup__item form-authPopup__item_input">
             <input type="password" class="form-authPopup__input" data-required data-error="Введите пароль">
             <label class="form-authPopup__label">Пароль</label>
           </div>
-          <div class="form-authPopup__item">
-            <button type="submit" class="form-authPopup__button btn btn-lightblue">Войти</button>
+          <div class="form-authPopup__item form-authPopup__item_btn">
+            <button type="submit" class="form-authPopup__button btn btn-lightblue" disabled>Войти</button>
           </div>
           <div class="form-authPopup__item">
             <button type="button" data-popup="#recoveryPopup" class="form-authPopup__button btn btn-white">Забыли пароль?</button>
@@ -112,7 +121,8 @@
 	<div class="popup__wrapper authPopup__wrapper">
 		<div class="popup__content authPopup__content">
       <div class="authPopup__top">
-        <button data-close type="button" class="popup__close authPopup__close"></button>
+        <button data-drag-close type="button" class="popup__close popupEventRegFull__close _mmd3dn"></button>
+        <button data-close type="button" class="popup__close authPopup__close _md3dn"></button>
       </div>
 			<div class="popup__text authPopup__text">
         <div class="authPopup__head">
@@ -123,8 +133,8 @@
             <input type="text" data-inputmask="'alias':'email'" data-inputmask-clearincomplete="true" class="form-authPopup__input" data-required data-error="Введите email">
             <label class="form-authPopup__label">Электронная почта</label>
           </div>
-          <div class="form-authPopup__item">
-            <button type="submit" class="form-authPopup__button btn btn-lightblue">Отправить письмо</button>
+          <div class="form-authPopup__item form-authPopup__item_btn">
+            <button type="submit" class="form-authPopup__button btn btn-lightblue" disabled>Отправить письмо</button>
           </div>
           <div class="form-authPopup__item">
             <button type="button" data-popup="#authPopup" class="form-authPopup__button btn btn-white">Войти по номеру телефона</button>
@@ -143,20 +153,21 @@
 	<div class="popup__wrapper authPopup__wrapper">
 		<div class="popup__content authPopup__content">
       <div class="authPopup__top">
-        <button data-close type="button" class="popup__close authPopup__close"></button>
+        <button data-drag-close type="button" class="popup__close popupEventRegFull__close _mmd3dn"></button>
+        <button data-close type="button" class="popup__close authPopup__close _md3dn"></button>
       </div>
 			<div class="popup__text authPopup__text">
         <div class="authPopup__head">
           <h2 class="authPopup__title">Регистрация</h2>
           <span class="authPopup__subtitle">Мы не нашли ваш email. Хотите <br> зарегистрироваться?</span>
         </div>
-        <form action="#" data-dev method="post" class="authPopup__form form-authPopup">
+        <form action="#" data-dev method="post" class="authPopup__form form-authPopup" data-validate>
           <div class="form-authPopup__item form-authPopup__item_input">
             <input type="text" data-inputmask="'alias':'email'" data-email-input class="form-authPopup__input" data-required="email" data-error="Укажите email">
             <label class="form-authPopup__label">Электронная почта</label>
           </div>
-          <div class="form-authPopup__item">
-            <button type="submit" class="form-authPopup__button btn btn-lightblue">Зарегистрироваться</button>
+          <div class="form-authPopup__item form-authPopup__item_btn">
+            <button type="submit" class="form-authPopup__button btn btn-lightblue" disabled>Зарегистрироваться</button>
           </div>
           <div class="form-authPopup__item">
             <button type="button" data-popup="#authPopup" class="form-authPopup__button btn btn-white">Войти по номеру телефона</button>
@@ -175,10 +186,17 @@
 	<div class="popup__wrapper authPopup__wrapper">
 		<div class="popup__content authPopup__content">
       <div class="authPopup__top">
-        <button data-popup="#authEmailPopup" class="authPopup__back">
+        <button data-drag-close type="button" class="popup__close popupEventRegFull__close _mmd3dn"></button>
+        <button data-popup="#registerStepOne" class="authPopup__back _md3dn">
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
             <path d="M6.53125 12.625L0.90625 7L6.53125 1.375M1.6875 7L13.0937 7" stroke="#8E8E93" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
+        </button>
+        <button data-popup="#registerStepOne" class="authPopup__back _mmd3dn">
+          <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 1L1 7L7 13" stroke="#8A8A8A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Назад</span>
         </button>
         <button data-close type="button" class="popup__close authPopup__close"></button>
       </div>
@@ -187,7 +205,7 @@
           <h2 class="authPopup__title">Вы врач?</h2>
           <span class="authPopup__subtitle">Пожалуйста, ответьте на вопрос, для <br> персональных рекомендаций</span>
         </div>
-        <form action="#" data-dev method="post" class="authPopup__form form-authPopup" data-radio-spollers data-radio-parent>
+        <form action="#" data-dev method="post" class="authPopup__form form-authPopup" data-radio-spollers data-radio-parent data-validate>
           <div class="form-authPopup__item form-authPopup__item_radio">
             <input type="radio" data-required data-error="Необходимо отметить хотя бы один вариант" name="specialization" id="form-authPopup__radio_1" class="form-authPopup__radio">
             <label for="form-authPopup__radio_1" class="form-authPopup__label"><span></span>Ортодонт</label>
@@ -236,8 +254,8 @@
             <input type="radio" data-required data-error="Необходимо отметить хотя бы один вариант" name="specialization" id="form-authPopup__radio_5" class="form-authPopup__radio">
             <label for="form-authPopup__radio_5" class="form-authPopup__label"><span></span>Не врач</label>
           </div>
-          <div class="form-authPopup__item">
-            <button type="submit" class="form-authPopup__button btn btn-lightblue">Продолжить</button>
+          <div class="form-authPopup__item form-authPopup__item_btn">
+            <button type="submit" class="form-authPopup__button btn btn-lightblue" disabled>Продолжить</button>
           </div>
         </form>
 			</div>
@@ -251,6 +269,18 @@
 	<div class="popup__wrapper authPopup__wrapper">
 		<div class="popup__content authPopup__content">
       <div class="authPopup__top">
+        <button data-drag-close type="button" class="popup__close popupEventRegFull__close _mmd3dn"></button>
+        <button data-popup="#registerStepTwo" class="authPopup__back _md3dn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M6.53125 12.625L0.90625 7L6.53125 1.375M1.6875 7L13.0937 7" stroke="#8E8E93" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button data-popup="#registerStepTwo" class="authPopup__back _mmd3dn">
+          <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 1L1 7L7 13" stroke="#8A8A8A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Назад</span>
+        </button>
         <button data-close type="button" class="popup__close authPopup__close"></button>
       </div>
 			<div class="popup__text authPopup__text">
@@ -258,7 +288,7 @@
           <h2 class="authPopup__title">Расскажите о себе</h2>
           <span class="authPopup__subtitle">Заполните поля для завершения регистрации</span>
         </div>
-        <form action="#" data-dev method="post" class="authPopup__form form-authPopup">
+        <form action="#" data-dev method="post" class="authPopup__form form-authPopup" data-validate>
           <div class="form-authPopup__item form-authPopup__item_input">
             <input type="text" class="form-authPopup__input" data-required>
             <label class="form-authPopup__label">Имя</label>
@@ -268,15 +298,19 @@
             <label class="form-authPopup__label">Фамилия</label>
           </div>
           <div class="form-authPopup__item form-authPopup__item_input">
+            <input type="text" class="form-authPopup__input" data-inputmask="'alias':'email'" data-required="email" data-error="Введите email">
+            <label class="form-authPopup__label">E-mail</label>
+          </div>
+          <div class="form-authPopup__item form-authPopup__item_input">
             <input type="text" class="form-authPopup__input">
-            <label class="form-authPopup__label">Адрес</label>
+            <label class="form-authPopup__label">Адрес клиники</label>
           </div>
           <div class="form-authPopup__item form-authPopup__item_checkbox">
             <input type="checkbox" class="form-authPopup__checkbox" id="form-authPopup__checkbox" data-required>
             <label class="form-authPopup__label" for="form-authPopup__checkbox"><span>Согласие на обработку данных и с  <br> <a href="#">политикой конфиденциальности</a></span></label>
           </div>
-          <div class="form-authPopup__item">
-            <button type="submit" class="form-authPopup__button btn btn-lightblue">Зарегистрироваться</button>
+          <div class="form-authPopup__item form-authPopup__item_btn">
+            <button type="submit" class="form-authPopup__button btn btn-lightblue" disabled>Зарегистрироваться</button>
           </div>
         </form>
 			</div>
@@ -289,7 +323,8 @@
 	<div class="popup__wrapper authPopup__wrapper">
 		<div class="popup__content authPopup__content">
       <div class="authPopup__top">
-        <button data-close type="button" class="popup__close authPopup__close"></button>
+        <button data-drag-close type="button" class="popup__close popupEventRegFull__close _mmd3dn"></button>
+        <button data-close type="button" class="popup__close authPopup__close _md3dn"></button>
       </div>
 			<div class="popup__text authPopup__text">
         <div class="authPopup__head">
